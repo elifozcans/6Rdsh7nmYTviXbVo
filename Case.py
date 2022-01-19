@@ -21,7 +21,7 @@ print(dataset)
 
 #Data Visualization and Analysis
 dataset.shape
-dataset['y'].value_counts()
+dataset['y'].value_counts() #no:37104 #yes:2896
 dataset.columns
 dataset.values
 dataset.describe(include='all')
@@ -51,12 +51,12 @@ y_predict1=knnmodel.predict(X_test)
 #Accuracy
 from sklearn.metrics import accuracy_score
 acc=accuracy_score(y_test,y_predict1)
-acc
+acc #0.92
 
 #Output Visualization
 prediction_output=pd.DataFrame(data=[y_test.values,y_predict1],index=['y_test','y_predict1'])
 prediction_output.transpose()
-prediction_output.iloc[0,:].value_counts()
+prediction_output.iloc[0,:].value_counts() #no:11150 #yes:850
 
 #Confusion Matrix  #939:yanlış sınıflandırma #11061:doğru sınıflandırma
 from sklearn.metrics import confusion_matrix
@@ -74,7 +74,7 @@ for n in range(1,Ks):
     mean_acc[n-1]=accuracy_score(y_test,yhat)
     
 print(mean_acc)    
-print( "The best accuracy was with", mean_acc.max(), "with k=", mean_acc.argmax()+1) 
+print( "The best accuracy was with", mean_acc.max(), "with k=", mean_acc.argmax()+1) #The best accuracy was with 0.9304166666666667 with k= 8
 
 plt.plot(range(1,Ks),mean_acc,'g')
 plt.legend(('Accuracy '))
@@ -89,11 +89,11 @@ from sklearn.model_selection import cross_val_score
 knn = KNeighborsClassifier(n_neighbors = 5)
 
 # X,y will automatically devided by 5 folder, the scoring I will still use the accuracy
-scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy') 
 
 # print all 5 times scores 
-print(scores)
+print(scores) #[0.9255   0.919125 0.916375 0.90875  0.91675 ]
 
 # then I will do the average about these five scores to get more accuracy score.
-print(scores.mean())
+print(scores.mean()) #0.9173
 
